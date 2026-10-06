@@ -1,0 +1,12 @@
+words.txt is derived from the Lilak Persian spell-checking dictionary
+(src/data/lexicon and src/data/dic_users):
+
+  Lilak, Persian Spell Checking Dictionary
+  Copyright 2015 Mostafa Sedaghat Joo
+  https://github.com/b00f/lilak
+
+Licensed under the Apache License, Version 2.0. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+Changes: the word column of both files was extracted, comment lines removed,
+and the result de-duplicated into a plain one-word-per-line list.

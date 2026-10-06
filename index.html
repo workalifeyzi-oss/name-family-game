@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#060914">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap">
+<title>اسم فامیل</title>
+<style>
+/* دنیای دیجیتال: زمینه تیره، شبکه نئونی، کارت‌های شیشه‌ای، درخشش فیروزه‌ای و سرخابی */
+:root{--bg:#060914;--txt:#e8f0ff;--dim:#8da0c8;--cyan:#27e6ff;--milk:#f6f2e9;--vio:#7b5cff;--red:#ff3860;--ok:#2dffa0;--gold:#ffd84a;--glass:rgba(14,22,54,.66);--line:rgba(120,160,255,.24);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--txt);font-family:Vazirmatn,Tahoma,"Segoe UI",system-ui,sans-serif;touch-action:manipulation}
+body{background-image:radial-gradient(60% 38% at 12% 0%,rgba(123,92,255,.38),transparent),radial-gradient(50% 36% at 95% 18%,rgba(246,242,233,.13),transparent),radial-gradient(70% 40% at 50% 105%,rgba(39,230,255,.20),transparent);background-attachment:fixed;padding:calc(max(10px,env(safe-area-inset-top)) + 46px) 16px max(20px,env(safe-area-inset-bottom));overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(39,230,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(39,230,255,.07) 1px,transparent 1px);background-size:36px 36px;animation:grid 14s linear infinite;-webkit-mask-image:linear-gradient(to bottom,#000 0,transparent 85%);mask-image:linear-gradient(to bottom,#000 0,transparent 85%)}
+@keyframes grid{to{background-position:0 36px,36px 0}}
+#app{position:relative;max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px;min-height:calc(100vh - 40px)}
+h1{font-family:Lalezar,Vazirmatn,Tahoma,system-ui,sans-serif;font-size:2.1rem;line-height:1.2;font-weight:400;letter-spacing:.02em;text-align:center;background:linear-gradient(100deg,var(--cyan),var(--milk));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(39,230,255,.45))}
+h2{font-size:1.1rem;font-weight:800;text-shadow:0 0 12px rgba(39,230,255,.35)}
+.card{background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;box-shadow:0 0 0 1px rgba(39,230,255,.06),0 12px 40px rgba(0,0,0,.45),inset 0 0 30px rgba(123,92,255,.09);padding:16px}
+.col{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sp{flex:1}
+.dim{color:var(--dim);font-size:.85rem}
+input[type=text],input[type=tel]{width:100%;font:inherit;font-size:1.05rem;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:rgba(4,8,26,.72);color:var(--txt);outline:0;transition:border-color .15s,box-shadow .15s}
+input::placeholder{color:#5f7096}
+input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(39,230,255,.18),0 0 18px rgba(39,230,255,.35)}
+.btn{font:inherit;font-weight:800;font-size:1.05rem;padding:13px 20px;border:0;border-radius:14px;background:linear-gradient(135deg,#ffffff,#e9e3d3);color:#0b1230;box-shadow:0 0 22px rgba(246,242,233,.35);cursor:pointer;transition:transform .1s,box-shadow .15s}
+.btn:active{transform:scale(.97)}
+.btn.blue{background:linear-gradient(135deg,var(--cyan),var(--vio));color:#04101f;box-shadow:0 0 24px rgba(39,230,255,.45)}
+.btn.ghost{background:rgba(255,255,255,.04);color:var(--txt);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.red{background:linear-gradient(135deg,#ff6a3d,var(--red));box-shadow:0 0 26px rgba(255,56,96,.55)}
+.btn[disabled]{opacity:.4;pointer-events:none;box-shadow:none}
+.btn.full{width:100%}
+.chip{font:inherit;font-size:.9rem;padding:6px 13px;border:1.5px solid var(--line);border-radius:20px;background:rgba(255,255,255,.03);color:var(--txt);cursor:pointer;transition:.15s}
+.chip.on{background:rgba(39,230,255,.16);border-color:var(--cyan);color:#bff7ff;box-shadow:0 0 14px rgba(39,230,255,.4)}
+.chip[disabled]{opacity:.65;pointer-events:none}
+.code{font-size:3rem;font-weight:900;letter-spacing:.35em;direction:ltr;text-align:center;color:var(--cyan);text-shadow:0 0 10px var(--cyan),0 0 30px rgba(39,230,255,.6);background:rgba(4,8,26,.6);border:1.5px dashed rgba(39,230,255,.55);border-radius:16px;padding:6px 0 6px .35em}
+.player{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.player:first-child{border-top:0}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--milk));color:#07101f;flex:none;box-shadow:0 0 12px rgba(39,230,255,.5)}
+.off{opacity:.4}
+.tag{font-size:.72rem;padding:2px 9px;border-radius:10px;background:rgba(246,242,233,.14);color:#f6f2e9;border:1px solid rgba(246,242,233,.45)}
+/* بازی */
+#top{display:flex;align-items:center;gap:16px}
+.letter{width:100px;height:100px;flex:none;display:grid;place-items:center;font-size:4.8rem;font-weight:900;line-height:1;color:#eaffff;border-radius:22px;background:rgba(4,8,26,.7);border:2px solid var(--cyan);text-shadow:0 0 8px var(--cyan),0 0 28px var(--cyan),0 0 56px var(--vio);box-shadow:0 0 24px rgba(39,230,255,.6),inset 0 0 24px rgba(39,230,255,.25);animation:flick 4s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.7}95%{opacity:1}97%{opacity:.8}}
+#timer{flex:1;min-width:0}
+#tnum{font-size:2.6rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1;text-shadow:0 0 14px rgba(39,230,255,.7);display:inline-block}
+#tbar{height:12px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px}
+#tfill{height:100%;width:100%;background:linear-gradient(90deg,var(--cyan),var(--vio));box-shadow:0 0 14px var(--cyan);transition:width .2s linear}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-weight:800;font-size:.95rem;display:flex;justify-content:space-between}
+.field .st{font-weight:700;font-size:.8rem}
+.field input.ok{border-color:var(--ok);box-shadow:0 0 14px rgba(45,255,160,.35)}
+.field input.bad{border-color:var(--red);box-shadow:0 0 14px rgba(255,56,96,.35)}
+.st.ok{color:var(--ok)}.st.bad{color:var(--red)}
+.mini{display:flex;gap:8px;flex-wrap:wrap}
+.mini span{font-size:.8rem;padding:3px 11px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.04)}
+.mini span.done{background:rgba(45,255,160,.18);color:#bfffe0;border-color:var(--ok)}
+.big{font-size:9rem;font-weight:900;text-align:center;line-height:1;color:var(--cyan);text-shadow:0 0 20px var(--cyan),0 0 60px var(--vio)}
+.banner{background:linear-gradient(135deg,#ff6a3d,var(--red));color:#fff;font-weight:800;padding:10px 14px;border-radius:12px;text-align:center;box-shadow:0 0 24px rgba(255,56,96,.5)}
+.warn{font-size:.85rem;color:#ff8aa0;font-weight:700}
+.over{position:fixed;inset:0;background:rgba(3,5,16,.7);display:grid;place-items:center;z-index:50}
+.over div{font-size:1.9rem;font-weight:900;color:#fff;text-shadow:0 0 14px var(--red),0 0 40px var(--red);border:2px solid var(--red);border-radius:20px;padding:20px 34px;box-shadow:0 0 40px rgba(255,56,96,.6),inset 0 0 30px rgba(255,56,96,.3);background:rgba(40,4,16,.8)}
+/* نبض قرمز لحظه‌های آخر */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:40;opacity:0;box-shadow:inset 0 0 90px 26px rgba(255,40,80,.85),inset 0 0 220px 60px rgba(255,40,80,.35)}
+body.hot::after{animation:beat 1s infinite}
+body.crit::after{animation:beat .6s infinite}
+@keyframes beat{0%,100%{opacity:.12}12%{opacity:1}26%{opacity:.25}40%{opacity:.85}70%{opacity:.12}}
+body.hot #tnum{color:#ff7a92;text-shadow:0 0 14px var(--red),0 0 34px var(--red);animation:tp 1s infinite}
+body.crit #tnum{animation:tp .6s infinite}
+body.hot #tfill{background:linear-gradient(90deg,#ff6a3d,var(--red));box-shadow:0 0 16px var(--red)}
+body.hot .letter{border-color:var(--red);text-shadow:0 0 8px var(--red),0 0 28px var(--red);box-shadow:0 0 28px rgba(255,56,96,.7),inset 0 0 24px rgba(255,56,96,.3)}
+@keyframes tp{0%,100%{transform:scale(1)}12%{transform:scale(1.28)}40%{transform:scale(1.15)}}
+/* مرور */
+.cat h2{margin-bottom:6px}
+.ans{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--line)}
+.ans:first-of-type{border-top:0}
+.ans .who{width:5.5em;flex:none;font-size:.8rem;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ans .txt{flex:1;min-width:0;font-weight:700;overflow-wrap:anywhere}
+.ans.rej .txt{text-decoration:line-through;color:var(--red)}
+.ans.empty .txt,.ans.inv .txt{color:var(--dim);font-weight:400}
+.pts{font-weight:900;min-width:2.6em;text-align:center;border-radius:9px;padding:2px 6px;background:rgba(45,255,160,.2);color:var(--ok);border:1px solid rgba(45,255,160,.5);font-variant-numeric:tabular-nums}
+.pts.z{background:rgba(255,255,255,.05);color:var(--dim);border-color:var(--line)}
+.vb{font:inherit;border:1.5px solid var(--line);background:rgba(255,255,255,.04);color:var(--txt);border-radius:9px;width:34px;height:30px;cursor:pointer;font-weight:900}
+.vb.on{background:var(--red);border-color:var(--red);box-shadow:0 0 14px rgba(255,56,96,.6)}
+.vb.on.yes{background:var(--ok);border-color:var(--ok);color:#04201a;box-shadow:0 0 14px rgba(45,255,160,.6)}
+.ans small{color:var(--dim);font-weight:400}
+/* امتیاز */
+.rank{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.rank:first-child{border-top:0}
+.num{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-weight:900;flex:none}
+.rank.first .num{background:var(--gold);color:#201800;border-color:var(--gold);box-shadow:0 0 16px rgba(255,216,74,.7)}
+.rank .nm{flex:1;min-width:0;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank .gain{color:var(--ok);font-weight:800;font-size:.9rem}
+.rank .tot{font-size:1.4rem;font-weight:900;min-width:2.6em;text-align:left}
+/* جشن برنده */
+.win{text-align:center;padding:26px 16px;border-radius:22px;border:2px solid var(--gold);background:radial-gradient(80% 90% at 50% 0%,rgba(255,216,74,.28),rgba(14,22,54,.7));box-shadow:0 0 40px rgba(255,216,74,.5),inset 0 0 40px rgba(255,216,74,.12);animation:shake .9s .1s both,glowp 2s 1s infinite}
+.crown{font-size:3.4rem;line-height:1;animation:bob 1.2s infinite alternate}
+.wl{color:var(--gold);font-weight:800;letter-spacing:.1em;margin-top:6px}
+.wn{font-size:2.3rem;font-weight:900;line-height:1.25;overflow-wrap:anywhere;text-shadow:0 0 14px var(--gold),0 0 40px rgba(255,216,74,.7)}
+.ws{color:var(--dim);margin-top:2px}
+.hur{margin-top:12px;font-size:1.5rem;font-weight:900;background:linear-gradient(100deg,var(--cyan),var(--milk),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes shake{0%,100%{transform:none}10%{transform:translate(-8px,2px) rotate(-1.5deg)}20%{transform:translate(8px,-2px) rotate(1.5deg)}30%{transform:translate(-7px,3px) rotate(-1deg)}40%{transform:translate(7px,-3px) rotate(1deg)}50%{transform:translate(-5px,2px)}60%{transform:translate(5px,-2px)}75%{transform:translate(-3px,0)}90%{transform:translate(2px,0)}}
+@keyframes bob{to{transform:translateY(-8px) rotate(6deg)}}
+@keyframes glowp{50%{box-shadow:0 0 70px rgba(255,216,74,.8),inset 0 0 50px rgba(255,216,74,.2)}}
+#mute{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:45;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(14,22,54,.8);color:var(--txt);font-size:1.1rem;cursor:pointer;box-shadow:0 0 14px rgba(39,230,255,.25)}
+#conf{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(10,16,40,.95);border:1px solid var(--cyan);box-shadow:0 0 20px rgba(39,230,255,.4);color:#fff;padding:10px 18px;border-radius:14px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:70;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){body::before,.letter,.win,.crown,body.hot::after,body.crit::after,body.hot #tnum,body.crit #tnum{animation:none}body.hot::after,body.crit::after{opacity:.55}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<button id="mute" aria-label="صدا"></button>
+<canvas id="conf"></canvas>
+<div id="toast"></div>
+<script>
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fa = n => Number(n).toLocaleString('fa-IR');
+const app = $('#app');
+const PRESETS = ['اسم', 'فامیل', 'شهر', 'کشور', 'حیوان', 'غذا', 'رنگ', 'اشیا', 'میوه', 'گل', 'شغل', 'ماشین', 'ورزش', 'فیلم', 'اسم دختر', 'اسم پسر'];
+let S = null, off = 0, es = null, sess = {}, ui = { key: '', sent: false, sig: '', cel: false, sec: -1 }, tT;
+try { sess = JSON.parse(localStorage.getItem('nf') || '{}'); } catch {}
+const saveSess = () => { try { localStorage.setItem('nf', JSON.stringify(sess)); } catch {} };
+
+/* ---------- صدا و لرزش ---------- */
+let AC = null;
+function unlock() { try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume(); } catch {} }
+addEventListener('pointerdown', unlock, { passive: true });
+let muted = false; try { muted = localStorage.getItem('nfm') === '1'; } catch {}
+function beep(f, d, type = 'sine', g = .15, at = 0) {
+  if (!AC || muted) return;
+  try {
+    const o = AC.createOscillator(), v = AC.createGain(), t = AC.currentTime + at;
+    o.type = type; o.frequency.value = f; v.gain.setValueAtTime(0, t); v.gain.linearRampToValueAtTime(g, t + .02); v.gain.exponentialRampToValueAtTime(.001, t + d);
+    o.connect(v); v.connect(AC.destination); o.start(t); o.stop(t + d + .05);
+  } catch {}
+}
+/* موزیک پس‌زمینه: سبک آرکید ۸بیتی (دو‌ماژور، C-Am-F-G)، تندتر در ثانیه‌های آخر */
+const mus = { on: false, step: 0, next: 0, timer: 0, bpm: 150, master: null, syn: null, lead: null, dly: null, noise: null };
+const mf = m => 440 * Math.pow(2, (m - 69) / 12);
+const N_ = null;
+const PROG = [{ r: 48, c: [60, 64, 67] }, { r: 45, c: [57, 60, 64] }, { r: 41, c: [57, 60, 65] }, { r: 43, c: [59, 62, 67] }];
+const MEL = [
+  [72, 76, 79, 76, 84, N_, 79, N_, 76, 79, 84, 79, 76, N_, 72, N_],
+  [72, 76, 81, 76, 84, N_, 81, N_, 76, 81, 84, 81, 76, N_, 72, N_],
+  [72, 77, 81, 77, 84, N_, 81, N_, 77, 81, 84, 81, 77, N_, 72, N_],
+  [74, 79, 83, 79, 86, N_, 83, N_, 79, 83, 86, 83, 79, N_, 74, N_]
+];
+const BASSP = [0, 0, 12, 0, 7, 0, 12, 7];
+function mVoice(bus, t, f, dur, type, g, lp, det, att, rel) {
+  const fl = AC.createBiquadFilter(), v = AC.createGain();
+  fl.type = 'lowpass'; fl.frequency.value = lp; fl.Q.value = .5;
+  v.gain.setValueAtTime(0, t); v.gain.linearRampToValueAtTime(g, t + att);
+  v.gain.setValueAtTime(g, Math.max(t + att, t + dur - rel)); v.gain.linearRampToValueAtTime(0, t + dur);
+  fl.connect(v); v.connect(bus);
+  (det ? [-det, det] : [0]).forEach(d => { const o = AC.createOscillator(); o.type = type; o.frequency.value = f; o.detune.value = d; o.connect(fl); o.start(t); o.stop(t + dur + .05); });
+}
+function mKick(t) {
+  const o = AC.createOscillator(), v = AC.createGain();
+  o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(48, t + .1);
+  v.gain.setValueAtTime(.8, t); v.gain.exponentialRampToValueAtTime(.001, t + .2);
+  o.connect(v); v.connect(mus.master); o.start(t); o.stop(t + .24);
+}
+function mNoise(t, type, f, g, dur) {
+  const s = AC.createBufferSource(), fl = AC.createBiquadFilter(), v = AC.createGain();
+  s.buffer = mus.noise; fl.type = type; fl.frequency.value = f;
+  v.gain.setValueAtTime(g, t); v.gain.exponentialRampToValueAtTime(.001, t + dur);
+  s.connect(fl); fl.connect(v); v.connect(mus.master); s.start(t, (t * 7.31) % .5); s.stop(t + dur + .02);
+}
+function mSchedule(until) {
+  const hi = mus.bpm > 160;
+  while (mus.next < until) {
+    const s = mus.step % 16, bar = Math.floor(mus.step / 16) % 4, t = mus.next, P = PROG[bar], spb = 60 / mus.bpm, s16 = spb / 4;
+    if (s === 0) mus.dly.delayTime.setTargetAtTime(spb * .75, t, .1);
+    if (s % 8 === 0 || (hi && s % 4 === 0)) mKick(t);
+    if (s % 8 === 4) mNoise(t, 'bandpass', 2400, .26, .11);
+    if (s % 2 === 0) mNoise(t, 'highpass', 8500, s % 4 === 2 ? .1 : .05, .025);
+    if (s % 2 === 0) { const nn = P.r + BASSP[s / 2]; mVoice(mus.syn, t, mf(nn), s16 * 1.9, 'triangle', .26, 1200, 0, .004, .04); }
+    if (s % 4 === 2) mVoice(mus.syn, t, mf(P.c[(s >> 2) % 3] + 12), s16 * 1.2, 'square', .012, 3000, 0, .003, .03);
+    const m = MEL[bar][s];
+    if (m !== null) {
+      mVoice(mus.lead, t, mf(m), s16 * 1.7, 'square', .05, 4500, 0, .004, .05);
+      if (hi) mVoice(mus.lead, t, mf(m + 12), s16 * 1.7, 'square', .02, 6000, 0, .004, .05);
+    }
+    if (hi && s >= 12) mNoise(t, 'bandpass', 2600, .07 + .03 * (s - 12), .07);
+    mus.next += s16; mus.step++;
+  }
+}
+function mBuild() {
+  if (!mus.noise) { mus.noise = AC.createBuffer(1, AC.sampleRate, AC.sampleRate); const d = mus.noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+  const comp = AC.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 4;
+  mus.master = AC.createGain(); mus.syn = AC.createGain(); mus.lead = AC.createGain();
+  mus.dly = AC.createDelay(1); mus.dly.delayTime.value = .2;
+  const fb = AC.createGain(), wet = AC.createGain(), df = AC.createBiquadFilter();
+  fb.gain.value = .22; wet.gain.value = .22; df.type = 'lowpass'; df.frequency.value = 3200;
+  mus.lead.connect(mus.syn); mus.lead.connect(mus.dly); mus.dly.connect(df); df.connect(wet); wet.connect(mus.master); df.connect(fb); fb.connect(mus.dly);
+  mus.syn.connect(mus.master); mus.master.connect(comp); comp.connect(AC.destination);
+}
+const MUS_VOL = .342; // حدود ۲۰٪ آرام‌تر از نسخه اول
+function musicStart() {
+  if (mus.on || muted || !AC) return;
+  mBuild();
+  mus.master.gain.setValueAtTime(0, AC.currentTime); mus.master.gain.linearRampToValueAtTime(MUS_VOL, AC.currentTime + .5);
+  mus.on = true; mus.step = 0; mus.next = AC.currentTime + .08; mus.bpm = 150;
+  mus.timer = setInterval(() => mSchedule(AC.currentTime + .15), 25);
+}
+function musicStop() {
+  if (!mus.on) return;
+  mus.on = false; clearInterval(mus.timer);
+  const m = mus.master; try { m.gain.cancelScheduledValues(AC.currentTime); m.gain.setValueAtTime(m.gain.value, AC.currentTime); m.gain.linearRampToValueAtTime(0, AC.currentTime + .3); } catch {}
+  setTimeout(() => { try { m.disconnect(); } catch {} }, 600);
+}
+const buzz = p =>{ try { navigator.vibrate && navigator.vibrate(p); } catch {} };
+function fanfare() { [523, 659, 784, 1047, 784, 1047, 1319].forEach((f, i) => { beep(f, .28, 'triangle', .2, i * .13); beep(f / 2, .28, 'sine', .1, i * .13); }); }
+
+/* ---------- کانفتی ---------- */
+const cv = $('#conf'), cx = cv.getContext('2d');
+let bits = [], cAnim = 0;
+function fitConf() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; cx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
+addEventListener('resize', fitConf); fitConf();
+const COLS = ['#27e6ff', '#f6f2e9', '#7b5cff', '#ffd84a', '#2dffa0', '#ff6a3d'];
+function burst(x, y, n) {
+  for (let i = 0; i < n; i++) { const a = Math.random() * 6.283, s = 3 + Math.random() * 9; bits.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 4, w: 5 + Math.random() * 7, h: 3 + Math.random() * 5, r: Math.random() * 6, vr: (Math.random() - .5) * .4, c: COLS[i % COLS.length], life: 1 }); }
+  if (!cAnim) cAnim = requestAnimationFrame(stepConf);
+}
+function stepConf() {
+  cx.clearRect(0, 0, innerWidth, innerHeight);
+  bits = bits.filter(b => b.life > 0 && b.y < innerHeight + 30);
+  for (const b of bits) { b.x += b.vx; b.y += b.vy; b.vy += .25; b.vx *= .985; b.r += b.vr; b.life -= .005; cx.save(); cx.globalAlpha = Math.max(0, Math.min(1, b.life * 1.6)); cx.translate(b.x, b.y); cx.rotate(b.r); cx.fillStyle = b.c; cx.shadowColor = b.c; cx.shadowBlur = 8; cx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h); cx.restore(); }
+  cAnim = bits.length ? requestAnimationFrame(stepConf) : 0;
+  if (!bits.length) cx.clearRect(0, 0, innerWidth, innerHeight);
+}
+function celebrate(iWon) {
+  buzz(iWon ? [200, 90, 200, 90, 200, 90, 600] : [150, 80, 150]);
+  fanfare();
+  const W = innerWidth, H = innerHeight;
+  [0, 350, 750, 1200, 1800, 2600].forEach((t, i) => setTimeout(() => burst(W * (.15 + Math.random() * .7), H * (.18 + Math.random() * .25), 70), t));
+  setTimeout(() => { for (let i = 0; i < 3; i++) burst(W * (i + 1) / 4, -10, 50); }, 400);
+}
+
+const muteBtn = $('#mute'), showMute = () => { muteBtn.textContent = muted ? '🔇' : '🔊'; };
+muteBtn.onclick = () => { unlock(); muted = !muted; try { localStorage.setItem('nfm', muted ? '1' : '0'); } catch {} if (muted) musicStop(); showMute(); };
+showMute();
+function toast(m) { const el = $('#toast'); el.textContent = m; el.classList.add('show'); clearTimeout(tT); tT = setTimeout(() => el.classList.remove('show'), 3000); }
+async function post(url, data) {
+  const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
+  const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || 'خطا'); return j;
+}
+const act = (type, d = {}) => post('/api/act', { room: sess.code, pid: sess.pid, type, ...d }).catch(e => toast(e.message));
+const nowS = () => Date.now() + off;
+
+function connect() {
+  if (es) es.close();
+  es = new EventSource(`/events?room=${sess.code}&pid=${sess.pid}`);
+  es.onmessage = e => { S = JSON.parse(e.data); off = S.now - Date.now(); render(); };
+  es.onerror = () => { if (es.readyState === 2) { sess = { name: sess.name }; saveSess(); S = null; ui.key = ''; toast('اتاق پیدا نشد'); render(); } };
+}
+function leave() { if (es) es.close(); sess = { name: sess.name }; saveSess(); S = null; ui.key = ''; history.replaceState(null, '', location.pathname); render(); }
+
+/* ---------- صفحه‌ها ---------- */
+function home() {
+  const q = new URLSearchParams(location.search).get('room') || '';
+  app.innerHTML = `
+  <div class="col" style="margin-top:6vh;align-items:center;text-align:center"><h1>اسم فامیل</h1><p class="dim">ز گهواره تا گور اسم فامیل بگوی</p></div>
+  <div class="card col">
+    <input type="text" id="nm" maxlength="16" placeholder="نام" value="${esc(sess.name || '')}" autocomplete="off">
+    <button class="btn blue full" id="mk">ساخت اتاق جدید</button>
+  </div>
+  <div class="card col">
+    <h2>ورود با کد اتاق</h2>
+    <input type="tel" id="cd" maxlength="4" inputmode="numeric" placeholder="کد چهار رقمی" value="${esc(q)}" style="direction:ltr;text-align:center;font-size:1.4rem;letter-spacing:.3em">
+    <button class="btn full" id="jn">ورود</button>
+  </div>`;
+  const go = async (path, extra) => {
+    const name = $('#nm').value.trim(); if (!name) return toast('اول اسمت را بنویس');
+    try { const r = await post(path, { name, ...extra }); sess = { name, code: r.code, pid: r.pid }; saveSess(); connect(); } catch (e) { toast(e.message); }
+  };
+  $('#mk').onclick = () => go('/api/create');
+  $('#jn').onclick = () => go('/api/join', { code: $('#cd').value.trim() });
+}
+
+function lobby() {
+  app.innerHTML = `
+  <div class="col"><h2>کد اتاق</h2><div class="code">${esc(S.code)}</div>
+  <div class="row"><button class="btn ghost sp" id="cp">کپی لینک ورود</button><button class="btn ghost" id="lv">خروج</button></div></div>
+  <div id="go"></div>
+  <div class="card"><h2 style="margin-bottom:6px">بازیکن‌ها</h2><div id="pl"></div></div>
+  <div class="card col" id="cfg"></div>`;
+  $('#cp').onclick = async () => { const link = `${location.origin}/?room=${S.code}`; try { await navigator.clipboard.writeText(link); toast('لینک کپی شد'); } catch { prompt('لینک را کپی کن', link); } };
+  $('#lv').onclick = leave;
+  patchLobby(true);
+}
+function patchLobby(force) {
+  const host = S.host === S.me;
+  $('#pl').innerHTML = S.players.map(p => `<div class="player ${p.connected ? '' : 'off'}"><b class="sp">${esc(p.name)}</b>${p.id === S.host ? '<span class="tag">سازنده</span>' : ''}</div>`).join('');
+  const sig = JSON.stringify([S.settings, host]);
+  if (force || sig !== ui.sig) {
+    ui.sig = sig; const st = S.settings;
+    const all = [...new Set([...PRESETS, ...st.cats])];
+    $('#cfg').innerHTML = `<h2>تنظیمات بازی</h2>
+    <div class="col"><span class="dim">زمان هر دور</span><div class="row">${[40, 55, 85, 115].map(t => `<button class="chip ${st.time === t ? 'on' : ''}" data-t="${t}" ${host ? '' : 'disabled'}>${fa(t)} ثانیه</button>`).join('')}</div></div>
+    <div class="col"><span class="dim">تعداد دور</span><div class="row">${[3, 5, 8, 10].map(t => `<button class="chip ${st.rounds === t ? 'on' : ''}" data-r="${t}" ${host ? '' : 'disabled'}>${fa(t)}</button>`).join('')}</div></div>
+    <div class="col"><span class="dim">موضوع‌ها (${fa(st.cats.length)})</span><div class="row">${all.map(c => `<button class="chip ${st.cats.includes(c) ? 'on' : ''}" data-c="${esc(c)}" ${host ? '' : 'disabled'}>${esc(c)}</button>`).join('')}</div>
+    ${host ? '<div class="row"><input type="text" id="xc" maxlength="16" placeholder="موضوع دلخواه" style="flex:1;width:auto"><button class="btn ghost" id="xa">افزودن</button></div>' : ''}</div>`;
+    if (host) {
+      const send = o => act('settings', { ...S.settings, ...o });
+      $('#cfg').querySelectorAll('[data-t]').forEach(b => b.onclick = () => send({ time: +b.dataset.t }));
+      $('#cfg').querySelectorAll('[data-r]').forEach(b => b.onclick = () => send({ rounds: +b.dataset.r }));
+      $('#cfg').querySelectorAll('[data-c]').forEach(b => b.onclick = () => { const c = b.dataset.c, l = S.settings.cats; send({ cats: l.includes(c) ? l.filter(x => x !== c) : [...l, c] }); });
+      $('#xa').onclick = () => { const v = $('#xc').value.trim(); if (v) send({ cats: [...S.settings.cats, v] }); };
+    }
+  }
+  $('#go').innerHTML = host ? `<button class="btn blue full" id="st" ${S.players.length < 2 ? 'disabled' : ''}>${S.players.length < 2 ? 'منتظر بازیکن دوم…' : 'شروع بازی'}</button>` : '<p class="dim" style="text-align:center">منتظر شروع بازی توسط سازنده اتاق…</p>';
+  if (host && $('#st')) $('#st').onclick = () => act('start');
+}
+
+function countdown() { app.innerHTML = `<div class="col" style="margin:auto;text-align:center"><h2>دور ${fa(S.round)} از ${fa(S.settings.rounds)}</h2><div class="big" id="big">۳</div><p class="dim">آماده باش…</p></div>`; }
+
+function play() {
+  ui.sent = false; ui.sec = -1;
+  app.innerHTML = `
+  <div id="top"><div class="letter">${esc(S.letter)}</div><div id="timer"><div class="dim">دور ${fa(S.round)} از ${fa(S.settings.rounds)}</div><div id="tnum">۰</div><div id="tbar"><div id="tfill"></div></div></div></div>
+  <div class="card col" id="form">${S.settings.cats.map((c, i) => `<div class="field"><label for="f${i}"><span>${esc(c)}</span><span class="st" id="s${i}"></span></label><input type="text" class="a" id="f${i}" data-c="${esc(c)}" maxlength="30" autocomplete="off" autocorrect="off" spellcheck="false" value="${esc(S.myAnswers[c] || '')}"></div>`).join('')}</div>
+  <div class="warn" id="warn"></div>
+  <div id="banner"></div>
+  <button class="btn red full" id="stop" disabled>استپ!</button>
+  <div class="mini" id="mini"></div>`;
+  let deb;
+  app.querySelectorAll('.a').forEach(inp => inp.addEventListener('input', () => { check(); clearTimeout(deb); deb = setTimeout(sendAnswers, 250); }));
+  $('#stop').onclick = () => { sendAnswers(); act('stop'); };
+  check(); patchPlay();
+}
+const OBJ_CATS = ['اشیا', 'اشیاء', 'شی', 'شیء', 'وسیله', 'وسایل'];
+const BANNED = /پلاستیک|مصنوعی|نایلون|نایلکس|سینتتیک|پلیاتیلن|پلیاستر|پلیپروپیلن|اکریلیک|پلکسی|ترموپلاست/;
+const isBanned = (cat, t) => OBJ_CATS.includes(nrm(cat).replace(/ /g, '')) && BANNED.test(nrm(t).replace(/ /g, ''));
+const nrm = s =>s.replace(/[ً-ٰٟـ]/g, '').replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/[ةۀ]/g, 'ه').replace(/[أإآ]/g, 'ا').replace(/‌/g, ' ').replace(/\s+/g, ' ').trim();
+function check() {
+  let ok = 0, n = 0, wrong = 0;
+  app.querySelectorAll('.a').forEach((inp, i) => {
+    n++; const t = nrm(inp.value), st = $('#s' + i), wl = t.length > 0 && t[0] !== S.letter;
+    if (t.length >= 2 && !wl && !isBanned(inp.dataset.c, t)) ok++;
+    if (wl) wrong++;
+    inp.className = 'a' + (wl ? ' bad' : ''); st.className = 'st' + (wl ? ' bad' : '');
+    st.textContent = wl ? 'باید با «' + S.letter + '» شروع شود' : '';
+  });
+  $('#stop').disabled = ok < n;
+  $('#warn').textContent = wrong ? 'جواب‌هایی که با «' + S.letter + '» شروع نشوند امتیاز ندارند.' : '';
+}
+function sendAnswers() { const a = {}; app.querySelectorAll('.a').forEach(i => a[i.dataset.c] = i.value); act('answers', { answers: a }); }
+function patchPlay() {
+  $('#banner').innerHTML = S.stopper ? `<div class="banner">${esc(S.stopper)} استپ زد! ۱۰ ثانیه وقت داری.</div>` : '';
+  const n = S.settings.cats.length;
+  $('#mini').innerHTML = S.players.map(p => `<span class="${p.filled >= n ? 'done' : ''}">${esc(p.name)} ${fa(p.filled)}/${fa(n)}</span>`).join('');
+  check();
+}
+
+function review() {
+  const cats = S.settings.cats, me = S.players.find(p => p.id === S.me);
+  app.innerHTML = `
+  <div class="card col"><div class="row"><h2 class="sp">بررسی جواب‌ها (حرف «${esc(S.letter)}»)</h2><span class="dim" id="rt"></span></div>
+  <p class="dim">کلمه‌ی نصفه یا بی‌معنی که در دایره لغات فارسی نباشد امتیاز نمی‌گیرد. اگر کلمه‌ای درست است (مثل اسم خاص)، با ✓ تأییدش کن؛ وقتی همه تأیید کنند پذیرفته می‌شود. امتیاز یک جواب فقط با انصراف خودِ بازیکن یا رضایت همه‌ی بقیه حذف می‌شود و هیچ امتیازی به کس دیگری نمی‌رسد.</p></div>
+  ${cats.map(c => `<div class="card cat"><h2>${esc(c)}</h2>${S.players.map(p => {
+    const e = S.res[p.id].cats[c], mine = p.id === S.me, k = c + '|' + p.id, v = !!(S.myVotes && S.myVotes[k]);
+    const bad = e.status.startsWith('bad:'), unk = e.status === 'unknown';
+    const cls = !e.text ? 'empty' : bad || (unk && !e.restored) ? 'inv' : e.rejected ? 'rej' : '';
+    let note = '', btn = '';
+    if (bad) note = e.status === 'bad:banned' ? 'ممنوع: پلاستیکی/مصنوعی' : e.status === 'bad:letter' ? 'حرف اشتباه' : 'ناقص یا بی‌معنی';
+    else if (unk) {
+      note = e.restored ? 'با رضایت همه پذیرفته شد' : 'در دایره لغات نیست (' + fa(e.vc) + ' از ' + fa(e.need) + ' تأیید)';
+      if (!mine) btn = `<button class="vb ${v ? 'on yes' : ''}" title="این کلمه درست است" data-c="${esc(c)}" data-t="${p.id}" data-on="${v ? 0 : 1}">✓</button>`;
+    } else if (e.status === 'ok') {
+      if (e.rejected) note = e.withdrawn ? 'خودش انصراف داد' : 'با رضایت همه حذف شد';
+      else if (e.vc) note = fa(e.vc) + ' از ' + fa(e.need) + ' موافق حذف';
+      btn = mine ? `<button class="vb wd ${e.withdrawn ? 'on' : ''}" title="${e.withdrawn ? 'پس گرفتن انصراف' : 'انصراف از امتیاز این جواب'}" data-c="${esc(c)}" data-w="${e.withdrawn ? 0 : 1}">${e.withdrawn ? '↺' : '⌫'}</button>` : `<button class="vb ${v ? 'on' : ''}" title="موافق حذف این جواب" data-c="${esc(c)}" data-t="${p.id}" data-on="${v ? 0 : 1}">✕</button>`;
+    }
+    return `<div class="ans ${cls}"><span class="who">${esc(p.name)}${mine ? ' (من)' : ''}</span><span class="txt">${e.text ? esc(e.text) : 'خالی'}${note ? ` <small>(${note})</small>` : ''}</span>${btn}<span class="pts ${e.pts ? '' : 'z'}">${fa(e.pts)}</span></div>`;
+  }).join('')}</div>`).join('')}
+  <button class="btn blue full" id="rd" ${me.ready ? 'disabled' : ''}>${me.ready ? 'منتظر بقیه…' : 'بررسی تمام شد'}</button>`;
+  app.querySelectorAll('.vb').forEach(b => b.onclick = () => b.dataset.w !== undefined ? act('withdraw', { cat: b.dataset.c, on: b.dataset.w === '1' }) : act('vote', { cat: b.dataset.c, target: b.dataset.t, on: b.dataset.on === '1' }));
+  $('#rd').onclick = () => act('ready');
+}
+
+function ranking(final) {
+  const list = [...S.players].sort((a, b) => b.score - a.score), host = S.host === S.me;
+  let winHtml = '', iWon = false;
+  if (final) {
+    const top = list[0].score, ws = list.filter(p => p.score === top);
+    iWon = ws.some(p => p.id === S.me);
+    winHtml = `<div class="win"><div class="crown">👑</div><div class="wl">${ws.length > 1 ? 'برنده‌ها' : 'برنده بازی'}</div><div class="wn">${ws.map(p => esc(p.name)).join(' و ')}</div><div class="ws">${fa(top)} امتیاز</div>${iWon ? '<div class="hur">هورااا! تبریک!</div>' : '<div class="hur" style="font-size:1.1rem">آفرین به برنده!</div>'}</div>`;
+  }
+  app.innerHTML = `
+  ${final ? winHtml : `<div class="col" style="margin-top:2vh"><h1 style="font-size:2rem">امتیاز دور ${fa(S.round)}</h1><p class="dim">حرف این دور «${esc(S.letter)}» بود.</p></div>`}
+  ${final ? '<h2>جدول نهایی</h2>' : ''}
+  <div class="card">${list.map((p, i) => `<div class="rank ${i === 0 ? 'first' : ''}"><div class="num">${fa(i + 1)}</div><div class="nm">${esc(p.name)}${p.id === S.me ? ' (من)' : ''}</div>${final ? '' : `<span class="gain">+${fa(p.gain)}</span>`}<div class="tot">${fa(p.score)}</div></div>`).join('')}</div>
+  ${final ? (host ? '<button class="btn blue full" id="rs">بازی دوباره</button>' : '<p class="dim" style="text-align:center">منتظر سازنده برای بازی دوباره…</p>') : (host ? `<button class="btn blue full" id="nx">دور بعد</button>` : '<p class="dim" style="text-align:center">منتظر شروع دور بعد…</p>')}
+  <button class="btn ghost full" id="lv">خروج</button>`;
+  if ($('#rs')) $('#rs').onclick = () => act('restart');
+  if ($('#nx')) $('#nx').onclick = () => act('next');
+  $('#lv').onclick = leave;
+  if (final && !ui.cel) { ui.cel = true; celebrate(iWon); }
+}
+
+/* ---------- نمایش ---------- */
+function render() {
+  if (!S) { ui.key = ''; document.body.classList.remove('hot', 'crit'); return home(); }
+  const key = S.phase + ':' + S.round;
+  if ((S.phase === 'lobby' || S.phase === 'play') && key === ui.key) return S.phase === 'lobby' ? patchLobby() : patchPlay();
+  if (S.phase !== 'final') ui.cel = false;
+  ui.key = key; ui.sig = '';
+  ({ lobby, countdown, play, review, scores: () => ranking(false), final: () => ranking(true) })[S.phase]();
+}
+setInterval(() => {
+  if (!S) return;
+  const rem = (S.endsAt - nowS()) / 1000, b = document.body;
+  if (S.phase !== 'play') { b.classList.remove('hot', 'crit'); const o = $('#ov'); if (o) o.remove(); }
+  if (S.phase === 'play' && rem > 0) { musicStart(); mus.bpm = rem <= 5 ? 178 : rem <= 10 ? 164 : 150; } else musicStop();
+  if (S.phase === 'countdown') {
+    const e = $('#big'), lab = rem > 3 ? 3 : rem > 0 ? Math.ceil(rem) : 0;
+    if (e) e.textContent = lab ? fa(lab) : 'برو!';
+    if (lab !== ui.cd) { ui.cd = lab; if (lab) { beep(660, .16, 'square', .16); buzz(40); } else { beep(1320, .4, 'square', .18); beep(1760, .4, 'square', .1, .08); buzz(120); } }
+  } else if (S.phase === 'play') {
+    ui.cd = -1;
+    const t = $('#tnum'); if (!t) return;
+    t.textContent = fa(Math.max(0, Math.ceil(rem)));
+    $('#tfill').style.width = Math.max(0, Math.min(100, rem / S.settings.time * 100)) + '%';
+    b.classList.toggle('hot', rem > 0 && rem <= 10); b.classList.toggle('crit', rem > 0 && rem <= 5);
+    const sec = Math.ceil(rem);
+    if (rem > 0 && rem <= 10 && sec !== ui.sec) { ui.sec = sec; if (rem <= 5) { beep(sec <= 2 ? 1100 : 880, .12, 'square', .12); buzz(sec <= 2 ? [60, 40, 60] : 60); } else beep(660, .08, 'sine', .08); }
+    if (rem <= 0 && !ui.sent) {
+      ui.sent = true; sendAnswers(); b.classList.remove('hot', 'crit');
+      app.querySelectorAll('.a').forEach(i => i.readOnly = true); $('#stop').disabled = true;
+      beep(220, .5, 'sawtooth', .18); buzz([300, 100, 300]);
+      b.insertAdjacentHTML('beforeend', '<div class="over" id="ov"><div>وقت تمام شد!</div></div>');
+    }
+  } else if (S.phase === 'review') { const r = $('#rt'); if (r) r.textContent = fa(Math.max(0, Math.ceil(rem))) + ' ثانیه'; }
+}, 150);
+
+if (sess.code && sess.pid) connect(); else render();
+</script>
+</body>
+</html>
