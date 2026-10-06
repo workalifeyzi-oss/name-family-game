@@ -1,0 +1,13 @@
+{
+  "name": "name-family-game",
+  "version": "1.0.0",
+  "description": "اسم فامیل: بازی چندنفره‌ی موبایلی با تایمر، امتیاز و دایره لغات فارسی",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
