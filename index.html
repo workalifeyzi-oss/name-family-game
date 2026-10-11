@@ -366,20 +366,17 @@ function review() {
   const cats = S.settings.cats, me = S.players.find(p => p.id === S.me);
   app.innerHTML = `
   <div class="card col"><div class="row"><h2 class="sp">بررسی جواب‌ها (حرف «${esc(S.letter)}»)</h2><span class="dim" id="rt"></span></div>
-  <p class="dim">کلمه‌ی نصفه یا بی‌معنی که در دایره لغات فارسی نباشد امتیاز نمی‌گیرد. اگر کلمه‌ای درست است (مثل اسم خاص)، با ✓ تأییدش کن؛ وقتی همه تأیید کنند پذیرفته می‌شود. امتیاز یک جواب فقط با انصراف خودِ بازیکن یا رضایت همه‌ی بقیه حذف می‌شود و هیچ امتیازی به کس دیگری نمی‌رسد.</p></div>
+  <p class="dim">همه‌ی بازیکن‌ها داور هستند. به جواب‌ها نگاه کن و اگر کلمه‌ای درست یا کامل نیست، با ✕ نظرت را بده. وقتی همه‌ی بقیه موافق باشند امتیازش حذف می‌شود؛ هر بازیکن هم می‌تواند خودش از جواب‌ش انصراف بدهد (⌫). امتیاز حذف‌شده به کس دیگری نمی‌رسد.</p></div>
   ${cats.map(c => `<div class="card cat"><h2>${esc(c)}</h2>${S.players.map(p => {
     const e = S.res[p.id].cats[c], mine = p.id === S.me, k = c + '|' + p.id, v = !!(S.myVotes && S.myVotes[k]);
-    const bad = e.status.startsWith('bad:'), unk = e.status === 'unknown';
-    const cls = !e.text ? 'empty' : bad || (unk && !e.restored) ? 'inv' : e.rejected ? 'rej' : '';
+    const bad = e.status.startsWith('bad:');
+    const cls = !e.text ? 'empty' : bad ? 'inv' : e.rejected ? 'rej' : '';
     let note = '', btn = '';
-    if (bad) note = e.status === 'bad:banned' ? 'ممنوع: پلاستیکی/مصنوعی' : e.status === 'bad:letter' ? 'حرف اشتباه' : 'ناقص یا بی‌معنی';
-    else if (unk) {
-      note = e.restored ? 'با رضایت همه پذیرفته شد' : 'در دایره لغات نیست (' + fa(e.vc) + ' از ' + fa(e.need) + ' تأیید)';
-      if (!mine) btn = `<button class="vb ${v ? 'on yes' : ''}" title="این کلمه درست است" data-c="${esc(c)}" data-t="${p.id}" data-on="${v ? 0 : 1}">✓</button>`;
-    } else if (e.status === 'ok') {
+    if (bad) note = e.status === 'bad:banned' ? 'ممنوع: پلاستیکی/مصنوعی' : e.status === 'bad:letter' ? 'حرف اشتباه' : 'خیلی کوتاه';
+    else if (e.status === 'ok') {
       if (e.rejected) note = e.withdrawn ? 'خودش انصراف داد' : 'با رضایت همه حذف شد';
       else if (e.vc) note = fa(e.vc) + ' از ' + fa(e.need) + ' موافق حذف';
-      btn = mine ? `<button class="vb wd ${e.withdrawn ? 'on' : ''}" title="${e.withdrawn ? 'پس گرفتن انصراف' : 'انصراف از امتیاز این جواب'}" data-c="${esc(c)}" data-w="${e.withdrawn ? 0 : 1}">${e.withdrawn ? '↺' : '⌫'}</button>` : `<button class="vb ${v ? 'on' : ''}" title="موافق حذف این جواب" data-c="${esc(c)}" data-t="${p.id}" data-on="${v ? 0 : 1}">✕</button>`;
+      btn = mine ? `<button class="vb wd ${e.withdrawn ? 'on' : ''}" title="${e.withdrawn ? 'پس گرفتن انصراف' : 'انصراف از امتیاز این جواب'}" data-c="${esc(c)}" data-w="${e.withdrawn ? 0 : 1}">${e.withdrawn ? '↺' : '⌫'}</button>` : `<button class="vb ${v ? 'on' : ''}" title="این کلمه درست نیست" data-c="${esc(c)}" data-t="${p.id}" data-on="${v ? 0 : 1}">✕</button>`;
     }
     return `<div class="ans ${cls}"><span class="who">${esc(p.name)}${mine ? ' (من)' : ''}</span><span class="txt">${e.text ? esc(e.text) : 'خالی'}${note ? ` <small>(${note})</small>` : ''}</span>${btn}<span class="pts ${e.pts ? '' : 'z'}">${fa(e.pts)}</span></div>`;
   }).join('')}</div>`).join('')}

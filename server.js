@@ -19,43 +19,21 @@ const OBJ_CATS = ['اشیا', 'اشیاء', 'شی', 'شیء', 'وسیله', 'و�
 const BANNED = /پلاستیک|مصنوعی|نایلون|نایلکس|سینتتیک|پلیاتیلن|پلیاستر|پلیپروپیلن|اکریلیک|پلکسی|ترموپلاست/;
 const isBanned = (cat, text) => OBJ_CATS.includes(norm(cat).replace(/ /g, '')) && BANNED.test(norm(text).replace(/ /g, ''));
 
-/* دایره لغات فارسی (اختیاری): فایل words.txt کنار server.js، هر خط یک کلمه */
-const DICT = new Set();
-try {
-  for (const line of fs.readFileSync(path.join(__dirname, 'words.txt'), 'utf8').split(/\r?\n/)) {
-    const w = norm(line.split('/')[0]).replace(/ /g, ''); if (w) DICT.add(w);
-  }
-  console.log(`دایره لغات بارگذاری شد: ${DICT.size} کلمه`);
-} catch { console.log('words.txt پیدا نشد؛ فقط تشخیص کلمه‌های ناقص و بی‌معنی ظاهری فعال است.'); }
-const SUF1 = ['ها', 'های', 'هایی', 'ان', 'ات', 'ین', 'ی', 'ای', 'تر', 'ترین', 'ه'];
-const SUF2 = ['م', 'ت', 'ش', 'مان', 'تان', 'شان', 'ام', 'ات', 'یم', 'ید', 'ند'];
-function known(t, depth = 0) {
-  if (DICT.has(t)) return true;
-  if (depth > 1) return false;
-  for (const s of [...SUF2, ...SUF1]) if (t.length > s.length + 1 && t.endsWith(s) && known(t.slice(0, -s.length), depth + 1)) return true;
-  return false;
-}
-// 'blank' | 'bad:letter' | 'bad:banned' | 'bad:junk' | 'unknown' (در دایره لغات نیست) | 'ok'
+// وضعیت یک جواب: 'blank' | 'bad:letter' | 'bad:short' | 'bad:banned' | 'ok'
+// درست یا نصفه بودن خود کلمه را ماشین تشخیص نمی‌دهد؛ این داوری با همه‌ی بازیکن‌هاست.
 function status(text, letter, cat) {
   const n = norm(text);
   if (!n) return 'blank';
   if (n[0] !== letter) return 'bad:letter';
+  if (n.length < 2) return 'bad:short';
   if (isBanned(cat, text)) return 'bad:banned';
-  if (!/^[؀-ۿ ]+$/.test(n) || /[0-9۰-۹٠-٩]/.test(n)) return 'bad:junk';
-  const toks = n.split(' ');
-  for (const t of toks) {
-    if (t.length < 2 && !(toks.length > 1 && t === 'و')) return 'bad:junk';
-    if (/(.)\1\1/.test(t)) return 'bad:junk';
-  }
-  if (DICT.size && !DICT.has(toks.join('')) && !toks.every(t => known(t))) return 'unknown';
   return 'ok';
 }
-const isValid = (text, letter, cat) => status(text, letter, cat) === 'ok';
-// «پر شده» یعنی با حرف درست شروع شده و ممنوع نیست؛ بی‌معنی بودن فقط روی امتیاز اثر دارد
-const isFilled = (text, letter, cat) => { const n = norm(text); return n.length >= 2 && n[0] === letter && !isBanned(cat, text); };
+// «پر شده» یعنی با حرف درست شروع شده، تک‌حرفی نیست و ممنوع نیست
+const isFilled = (text, letter, cat) => status(text, letter, cat) === 'ok';
 
-/* امتیازدهی. حذف امتیاز فقط برای خود همان جواب است و به هیچ حریفی منتقل نمی‌شود.
-   حذف فقط با انصراف خود بازیکن یا رضایت همه‌ی بقیه انجام می‌شود. */
+/* امتیازدهی. همه‌ی بازیکن‌ها داور هستند: اگر همه‌ی بقیه جوابی را رد کنند یا خود بازیکن از آن انصراف بدهد، امتیازش حذف می‌شود.
+   امتیاز حذف‌شده به هیچ حریفی منتقل نمی‌شود: جواب ردشده همچنان در شمارش یکتا/تکراری می‌ماند. */
 function compute(room) {
   const ids = [...room.players.keys()], n = ids.length, out = {};
   ids.forEach(id => { out[id] = { total: 0, cats: {} }; });
@@ -64,12 +42,9 @@ function compute(room) {
       const text = String(room.players.get(id).answers[cat] || '').trim();
       const st = status(text, room.letter, cat), k = cat + '|' + id;
       const vc = room.votes[k] ? room.votes[k].size : 0, all = n > 1 && vc >= n - 1, withdrawn = !!room.withdrawn[k];
-      let present = st === 'ok', restored = false, rejected = false;
-      if (st === 'unknown' && all) { present = true; restored = true; }
-      if (present && (withdrawn || (st === 'ok' && all))) rejected = true;
-      return { id, text, st, present, restored, rejected, withdrawn, vc, need: n - 1, pts: 0 };
+      const present = st === 'ok', rejected = present && (withdrawn || all);
+      return { id, text, st, present, rejected, withdrawn, vc, need: n - 1, pts: 0 };
     });
-    // جواب ردشده همچنان در شمارش یکتا/تکراری می‌ماند تا امتیازش به حریف نرسد
     const live = entries.filter(e => e.present), groups = {};
     live.forEach(e => { const g = norm(e.text).replace(/ /g, ''); groups[g] = (groups[g] || 0) + 1; });
     live.forEach(e => {
@@ -77,7 +52,7 @@ function compute(room) {
       e.pts = e.rejected ? 0 : base;
     });
     entries.forEach(e => {
-      out[e.id].cats[cat] = { text: e.text, status: e.st, present: e.present, restored: e.restored, rejected: e.rejected, withdrawn: e.withdrawn, vc: e.vc, need: e.need, pts: e.pts };
+      out[e.id].cats[cat] = { text: e.text, status: e.st, present: e.present, rejected: e.rejected, withdrawn: e.withdrawn, vc: e.vc, need: e.need, pts: e.pts };
       out[e.id].total += e.pts;
     });
   }
@@ -128,10 +103,6 @@ function view(r, pid) {
     filled: r.settings.cats.filter(c => isFilled(p.answers[c], r.letter, c)).length
   }));
   const v = { now: Date.now(), code: r.code, me: pid, host: r.host, phase: r.phase, round: r.round, letter: r.letter, endsAt: r.endsAt, settings: r.settings, stopper: r.stopper, players, myAnswers: me ? me.answers : {} };
-  if (me && r.phase === 'play') {
-    v.chk = {};
-    for (const c of r.settings.cats) { const t = String(me.answers[c] || '').trim(); v.chk[c] = { s: status(t, r.letter, c), t }; }
-  }
   if (showAll && res) {
     v.res = res;
     v.myVotes = {};
